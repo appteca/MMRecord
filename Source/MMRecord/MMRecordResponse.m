@@ -329,7 +329,9 @@
 }
 
 - (void)addProtoRecord:(MMRecordProtoRecord *)protoRecord {
-    [self.protoRecords addObject:protoRecord];
+    if (![self.prototypeDictionary objectForKey:protoRecord.primaryKeyValue]) {
+        [self.protoRecords addObject:protoRecord];
+    }
 }
 
 - (void)addProtoRecordToDictionary:(MMRecordProtoRecord *)protoRecord {
