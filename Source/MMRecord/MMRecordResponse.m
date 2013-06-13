@@ -344,7 +344,7 @@
 #pragma mark - Accessors
 
 - (MMRecordProtoRecord *)protoRecordForPrimaryKeyValue:(id)primaryKeyValue {
-NSLog(@"%d", [[self protoRecords] count]);
+    //NSLog(@"%d", [[self protoRecords] count]);
     return [self.prototypeDictionary objectForKey:primaryKeyValue];
 }
 
@@ -455,6 +455,7 @@ NSLog(@"%d", [[self protoRecords] count]);
             return nil;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[entity name]];
+        [fetchRequest setFetchBatchSize:20];
         fetchRequest.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:primaryAttributeKey ascending:YES]];
         fetchRequest.predicate = [NSPredicate predicateWithFormat: @"SELF.%@ IN %@", primaryAttributeKey, primaryKeys];
         
